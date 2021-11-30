@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { GeneralPurposeService } from '../shared/services/general-purpose.service';
 import { AuthService } from './shared/auth.service';
 
 
@@ -16,14 +17,14 @@ export class AuthenticationComponent implements OnInit {
   loginMode=true;
   loginForm: FormGroup;
   isLoading:boolean = false;
-  responseError = '';  
   @ViewChild(FormGroupDirective,{ static: false}) formGroupDirective: FormGroupDirective;
   get formError() { return this.loginForm.controls; }
 
   constructor(
     private _fb:FormBuilder,
     private _authService: AuthService,
-    private router:Router
+    private _router:Router,
+    private _gpService:GeneralPurposeService,
   ) { }
 
   ngOnInit() {
@@ -56,13 +57,12 @@ export class AuthenticationComponent implements OnInit {
       )
       .subscribe(()=> {
         this.isLoading = false;
-        this.router.navigateByUrl('/all-recipes');
+        this._router.navigateByUrl('/all-recipes');
       },
       (err)=>{
         console.log(err);
-        const errCode = err.error.error.code;
         const errMsg = err.error.error.message;
-        this.responseError = `An error occured. Code : ${errCode} Message : ${errMsg}`
+        this._gpService.openSnackbar('FAILURE',`An error occured. Error Message : ${errMsg}`)
       })
 
     } else {
@@ -72,13 +72,12 @@ export class AuthenticationComponent implements OnInit {
       )
       .subscribe(()=> { 
         this.isLoading = false;
-        this.router.navigateByUrl('/all-recipes');
+        this._router.navigateByUrl('/all-recipes');
       },
       (err)=>{
         console.log(err);
-        const errCode = err.error.error.code;
         const errMsg = err.error.error.message;
-        this.responseError = `An error occured. Code : ${errCode} Message : ${errMsg}`
+        this._gpService.openSnackbar('FAILURE',`An error occured. Error Message : ${errMsg}`)
       })
     }
 
