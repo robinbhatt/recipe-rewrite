@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormGroup, FormGroupDirective, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs/operators';
+import { GeneralPurposeService } from '../../services/general-purpose.service';
 import { RecipeService } from '../../services/recipe.service';
 
 @Component({
@@ -13,27 +14,31 @@ export class RecipeFormComponent { // implements OnInit {
 
   recipeForm: FormGroup;
   isLoading:boolean = false;
-  responseError = '';  
   @ViewChild(FormGroupDirective,{ static: false}) formGroupDirective: FormGroupDirective;
   get formError() { return this.recipeForm.controls; }
 
   constructor(
     private _fb:FormBuilder,
     private _recipeService: RecipeService,
+    private _gpService: GeneralPurposeService,
   ) { }
 
   ngOnInit() {
+    this.recipeFormInit();
+  }
+
+
+  recipeFormInit(){
     this.recipeForm = this._fb.group({
       Name : ['',[Validators.required,Validators.minLength(5)]],
       Description : ['',[Validators.required,Validators.minLength(20)]],
       Image_Path : ['https://media.istockphoto.com/photos/chicken-tikka-biryani-made-of-basmati-rice-cooked-with-masala-spices-picture-id1292437269'],
     })
+
   }
 
   onSubmit() {
-
     const userUID = JSON.parse(localStorage.getItem('userData') as any);
-
     if(this.recipeForm.invalid || !userUID){ return; }
     this.isLoading = true;
 
@@ -45,15 +50,15 @@ export class RecipeFormComponent { // implements OnInit {
       (resData)=> {
       console.log(resData);
       this.isLoading = false;
+        this._gpService.openSnackbar('SUCCESS','Added Recipe Successfully')
       // this.router.navigateByUrl('/all-recipes');
     },
     (err)=>{
       console.log(err);
       const errCode = err.error.error.code;
       const errMsg = err.error.error.message;
-      this.responseError = `An error occured. Code : ${errCode} Message : ${errMsg}`
-    }
-     )
+      this._gpService.openSnackbar('FAILURE',`An error occured. Code : ${errCode} Message : ${errMsg}`)
+    })
     //  this.formGroupDirective.resetForm()
     this._recipeService.saveLoggedInUserRecipes_Firebase(userUID.id,this.recipeForm.value).subscribe(res=>{ console.log(res)})
   }

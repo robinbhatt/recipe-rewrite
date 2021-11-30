@@ -3,8 +3,6 @@
 
 <div class="login-container">
     <div class="login-content">
-
-        <div *ngIf="responseError">{{responseError}}<button (click)="responseError = '' ">clear</button></div>
         
         <div *ngIf="isLoading" style="text-align: center;">
             <loading-spinner></loading-spinner>

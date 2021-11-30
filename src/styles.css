@@ -5,4 +5,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+.success{
+    background:green;
+    color: black;
+}
+
+.success{
+    background:green;
+    color: black;
+}
+
+.info{
+    background:yellow;
+    color: black;
+}
+
+.failure{
+   background-color:red;
+  color:black;
+  }
 
