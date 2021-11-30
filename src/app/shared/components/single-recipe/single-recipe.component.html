@@ -1,0 +1,9 @@
+<div *ngIf="singleRecipe">
+    <!-- <a class="thumbnail" (click)="viewRecipe()" [routerLink]="[recipeData[0]]"> -->
+    <a class="thumbnail" (click)="viewRecipe()">
+    <img class="img-thumbnail"
+        [src]="singleRecipe.Image_Path"
+        [alt]="singleRecipe.Name">
+</a><br>
+<div style="text-align: center;">{{singleRecipe.Name}}</div>
+</div>

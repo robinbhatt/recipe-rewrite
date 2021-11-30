@@ -1,0 +1,17 @@
+<div style="text-align: right;"><i class="material-icons" >open_in_new</i></div>
+<h2 mat-dialog-title>{{data.Name}}</h2>
+<mat-dialog-content class="mat-typography">
+
+  <h3>Description</h3>
+  <p>{{data.Description}}</p>
+
+  <h3>Images</h3>
+  <img class="img-thumbnail"
+        [src]="data.Image_Path"
+        [alt]="data.Name">
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

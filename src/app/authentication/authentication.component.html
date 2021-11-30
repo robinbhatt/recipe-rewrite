@@ -1,0 +1,70 @@
+
+<br><br><br>
+
+<div class="login-container">
+    <div class="login-content">
+
+        <div *ngIf="responseError">{{responseError}}<button (click)="responseError = '' ">clear</button></div>
+        
+        <div *ngIf="isLoading" style="text-align: center;">
+            <loading-spinner></loading-spinner>
+        </div>
+
+        <mat-card *ngIf="!isLoading">
+            <mat-toolbar class="login-toolbar" style="background-color:white"><strong>{{ loginMode ? 'Login' : 'Register' }}
+            </strong></mat-toolbar><br>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+                <div class="text-center" *ngIf="loginForm.value.profileUrl && !loginMode">
+                    <img [src]="loginForm.value.profileUrl" width="100" height="100" class="rounded-circle">
+                </div>
+
+                <mat-form-field>
+                    <input type="email" autocomplete="true" matInput placeholder="Email" formControlName="email">
+                        <mat-error *ngIf="formError.email.errors?.required">Username is required</mat-error>
+                        <mat-error *ngIf="formError.email.errors?.minlength">Minimum length should be minimum 5 character</mat-error>
+                        <mat-error *ngIf="formError.email.errors?.email">Email should be in the <i><u>username@domain.com</u></i> format </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input type="password" autocomplete="false" matInput placeholder="Password"formControlName="password">
+                    <mat-error *ngIf="formError.password.errors?.required">Password is required</mat-error>
+                    <mat-error *ngIf="formError.password.errors?.minlength">Password length should be minimum 6 character</mat-error>
+                </mat-form-field>
+
+                <mat-form-field *ngIf="!loginMode">
+                    <input type="email" autocomplete="true" matInput placeholder="https://example.com/any-public-url/your-img.jpg" formControlName="profileUrl">
+                </mat-form-field>
+
+
+                <sup style="color: blue; cursor: pointer;"><small>Forgot Password ?</small></sup><br><br>
+
+                <div  class="text-center">
+                    <button type="submit" mat-raised-button color="primary" [disabled]="!loginForm.valid">{{ loginMode ? 'Login' : 'Register' }}
+                    </button>
+                    <button type="button" mat-flat-button color="primary" (click)="switchLogin()">Switch to {{ loginMode ? 'Register' : 'Login' }}
+                    </button>
+                </div>
+
+            </form>
+            <br>
+            <mat-toolbar class="login-toolbar text-muted" style="background-color:white"><sub><small>Or Sign Up using with</small></sub></mat-toolbar>
+            
+            <div class="socialMediaFlex">
+                <button mat-mini-fab><mat-icon>home</mat-icon></button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button mat-mini-fab><mat-icon>favorite</mat-icon></button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button mat-mini-fab><mat-icon>home</mat-icon></button>
+            </div>
+
+            <br><br>
+            <br>
+
+        </mat-card>
+    </div>
+</div>
+
+            <!-- <mat-toolbar class="login-toolbar text-muted" style="background-color:white">
+                <sub><small>Don't have an account ? <a style="color: blue; cursor: pointer;"> Signup </a></small></sub>
+            </mat-toolbar> -->
+

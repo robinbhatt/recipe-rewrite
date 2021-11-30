@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-md navbar-light shadow" style="background-color:whitesmoke;">
+    <div class="container">
+        <h2 routerLink="all-recipes" style="cursor: pointer;"><strong><span class="flip">R</span>B</strong></h2>
+
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        </form>
+
+      <b class="nav-item dropdown" *ngIf="isUserAuthenticated">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img [src]=" userDetails.ppURL ?  userDetails.ppURL : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'" 
+          width="40px" height="40px" class="rounded-circle">
+
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" routerLink="/my-recipes">My Recipes</a></li>
+          <li><a class="dropdown-item" routerLink="">My Saved Recipes</a></li>
+          <li><a class="dropdown-item" (click)="logout()" style="cursor: pointer;">Logout</a></li>
+        </ul>
+    </b>
+
+      <h2 *ngIf="!isUserAuthenticated">
+        <a style="text-decoration: none; color: black;" routerLink="auth">
+        <strong>Auth</strong></a>
+      </h2>
+
+    </div>
+  </nav>
+

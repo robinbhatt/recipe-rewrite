@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row">
+        <div class="row">
+
+            <ng-container *ngFor="let recipe of recipesData">
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <single-recipe [singleRecipe]="recipe[1]" [recipeData]="recipe"></single-recipe>
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+</div>
