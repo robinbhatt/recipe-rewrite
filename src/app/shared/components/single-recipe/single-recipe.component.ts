@@ -13,8 +13,8 @@ export class SingleRecipeComponent implements OnInit {
   constructor(public dialog: MatDialog, private route:ActivatedRoute ) { }
 
   ngOnInit(): void {
-    const recipeName = this.route.snapshot.paramMap.get('recipe');
-    console.log(recipeName)
+    // const recipeName = this.route.snapshot.paramMap.get('recipe');
+    // console.log(recipeName)
 
     // if(recipeName !== null){
     //   console.log(recipeName)
@@ -28,7 +28,9 @@ export class SingleRecipeComponent implements OnInit {
     let oldUrl = window.location.href;
     let recipedialog = this.dialog.open(SingleRecipeModalComponent,
       { data:this.singleRecipe,
-        disableClose:true})
+        disableClose:true,
+        width: '700px'
+      })
 
     recipedialog.afterOpened().subscribe(res => {
       let urltoupdate='';

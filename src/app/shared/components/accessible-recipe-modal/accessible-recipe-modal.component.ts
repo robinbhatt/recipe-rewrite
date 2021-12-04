@@ -11,8 +11,8 @@ export class AccessibleRecipeModalComponent implements OnInit {
   constructor(private route:ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.route.snapshot.paramMap.get('recipe'))
-    this.route.paramMap.subscribe(param => {  console.log(param.get('recipe'))  })
+    // console.log(this.route.snapshot.paramMap.get('recipe'))
+    // this.route.paramMap.subscribe(param => {  console.log(param.get('recipe'))  })
   }
 
 }
