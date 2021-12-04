@@ -16,8 +16,8 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     this._authService.autoLogin();
 
-    console.log(this.route.snapshot.paramMap.get('recipe'))
-    this.route.paramMap.subscribe(param => {  console.log(param.get('recipe'))  })
+    // console.log(this.route.snapshot.paramMap.get('recipe'))
+    // this.route.paramMap.subscribe(param => {  console.log(param.get('recipe'))  })
 
     // const recipeName = this.route.snapshot.paramMap.get('recipe');
     // if(recipeName !== null){
